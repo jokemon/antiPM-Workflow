@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Pronunciation Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --primary-hover-color: #0056b3;
+            --secondary-color: #6c757d;
+            --secondary-hover-color: #545b62;
+            --light-bg-color: #f8f9fa;
+            --border-color: #ced4da;
+            --text-color: #333;
+            --error-color: #dc3545;
+            --success-color: #28a745;
+            --font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: #e9ecef;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px; /* Max width for larger screens */
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            font-size: 2em; /* Responsive font size */
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        textarea#text-input {
+            width: 100%; /* Take full width of parent */
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        textarea#text-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+        }
+
+        #speak-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        #speak-button:hover {
+            background-color: var(--primary-hover-color);
+        }
+
+        #record-button {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        #record-button:hover {
+            background-color: var(--secondary-hover-color);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+
+        .results-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .display-box {
+            background-color: var(--light-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            min-height: 60px;
+            line-height: 1.6;
+            word-wrap: break-word; /* Prevent long words from overflowing */
+        }
+
+        #feedback-display {
+            font-style: italic;
+        }
+
+        #feedback-display.error { /* Example for specific feedback styling */
+            color: var(--error-color);
+            font-weight: bold;
+        }
+
+        #feedback-display.success { /* Example for specific feedback styling */
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .mismatched-word {
+            color: var(--error-color);
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #ffe0e0; /* Light red background for more emphasis */
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .retry-word-button {
+            font-size: 0.85em;
+            padding: 4px 8px;
+            margin-left: 8px;
+            vertical-align: middle;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .retry-word-button:hover {
+            background-color: var(--primary-hover-color);
+        }
+        
+        #exercise-display {
+            /* Currently not used directly as per instructions, keeping for future */
+            /* If used, it would inherit .display-box styling or have its own */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .button-group {
+                flex-direction: column; /* Stack buttons vertically */
+            }
+            button {
+                width: 100%; /* Make buttons full width */
+            }
+            textarea#text-input {
+                min-height: 100px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>English Pronunciation Practice</h1>
+        </header>
+
+        <section class="input-section">
+            <textarea id="text-input" placeholder="Enter English text here to practice..."></textarea>
+            <div class="button-group">
+                <button id="speak-button">朗读 (Speak Aloud)</button>
+                <button id="record-button">🎤 Start Recording</button>
+            </div>
+        </section>
+
+        <section class="results-section">
+            <div id="original-text-display" class="display-box">
+                <!-- Text that was read will be displayed here -->
+            </div>
+
+            <div id="recognized-text-display" class="display-box">
+                <!-- Recognized speech will be displayed here -->
+            </div>
+
+            <div id="feedback-display" class="display-box">
+                <!-- Pronunciation feedback will be displayed here -->
+            </div>
+
+            <div id="exercise-display" class="display-box" style="display: none;">
+                <!-- Kept hidden as per current plan, but styled -->
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
