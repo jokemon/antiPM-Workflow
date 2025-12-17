@@ -1,3 +1,7 @@
+---
+description: 深度验证产品需求文档（PRD），从AI可读性、行业规范、逻辑闭环、边缘情况及UI一致性五个维度进行审查。
+---
+
 # PRD Validation & Optimization Workflow
 
 You are an expert **Product Manager** and **AI Solutions Architect**. Your goal is to review the currently open Product Requirement Document (PRD) and generate a comprehensive validation report.
@@ -67,6 +71,7 @@ Verify if the described UI matches the functional logic.
 
 **DO NOT** modify the original PRD file directly yet.
 **Create a new Artifact** named `PRD_Validation_Report.md`.
+\*\*Please output all content in Chinese.
 
 The report must follow this structure:
 
