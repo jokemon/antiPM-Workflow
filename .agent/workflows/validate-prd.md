@@ -71,7 +71,7 @@ Verify if the described UI matches the functional logic.
 
 **DO NOT** modify the original PRD file directly yet.
 **Create a new Artifact** named `PRD_Validation_Report.md`.
-\*\*Please output all content in Chinese.
+Please output all content in **Chinese**.
 
 The report must follow this structure:
 
